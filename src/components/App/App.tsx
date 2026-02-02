@@ -23,8 +23,8 @@ export default function App() {
 
   const { data } = useQuery({
     queryKey: ["notes", page, search],
-    queryFn: () =>
-      fetchNotes({ page, perPage: 12, search }),
+    queryFn: () => fetchNotes({ page, perPage: 12, search }),
+    placeholderData: (previousData) => previousData,
   });
 
   return (
