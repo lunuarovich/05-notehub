@@ -22,18 +22,29 @@ export interface FetchNotesResponse {
 export const fetchNotes = async (
   params: FetchNotesParams
 ): Promise<FetchNotesResponse> => {
-  const { data } = await api.get("/notes", { params });
+  const { data } = await api.get<FetchNotesResponse>(
+    "/notes",
+    { params }
+  );
+
   return data;
 };
 
 export const createNote = async (
   note: Omit<Note, "id" | "createdAt" | "updatedAt">
 ): Promise<Note> => {
-  const { data } = await api.post("/notes", note);
+  const { data } = await api.post<Note>(
+    "/notes",
+    note
+  );
+
   return data;
 };
 
 export const deleteNote = async (id: string): Promise<Note> => {
-  const { data } = await api.delete(`/notes/${id}`);
+  const { data } = await api.delete<Note>(
+    `/notes/${id}`
+  );
+
   return data;
 };

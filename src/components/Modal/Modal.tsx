@@ -10,13 +10,20 @@ interface ModalProps {
 
 export default function Modal({ children, onClose }: ModalProps) {
   useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
+  const handler = (e: KeyboardEvent) => {
+    if (e.key === "Escape") onClose();
+  };
 
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, [onClose]);
+  document.body.style.overflow = "hidden";
+
+  window.addEventListener("keydown", handler);
+
+  return () => {
+    window.removeEventListener("keydown", handler);
+
+    document.body.style.overflow = "auto";
+  };
+}, [onClose]);
 
   return createPortal(
     <div

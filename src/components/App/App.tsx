@@ -34,6 +34,7 @@ export default function App() {
         {data && data.totalPages > 1 && (
           <Pagination
             pageCount={data.totalPages}
+            currentPage={page}
             onPageChange={setPage}
           />
         )}
